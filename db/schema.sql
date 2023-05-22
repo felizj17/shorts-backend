@@ -8,8 +8,8 @@ CREATE EXTENSION pgcrypto;
 CREATE TABLE users(
     id SERIAL PRIMARY key,
     email TEXT NOT NULL UNIQUE,
-    username VARCHAR(60) NOT NULL UNIQUE,
-    _at VARCHAR(60) NOT NULL UNIQUE,
+    username VARCHAR(60) NOT NULL,
+    shorty VARCHAR(60) NOT NULL ,
     password TEXT NOT NULL
 );
 

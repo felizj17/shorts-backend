@@ -2,7 +2,7 @@ const db = require('../db/dbConfig');
 
 const getAllTweets = async (user_id) => {
   const allTweets = await db.any('SELECT * FROM tweets WHERE user_id=$1', user_id);
-  if (allTweets[0].user_id) {
+  if (!allTweets.error) {
     return allTweets;
   } else {
     return { error: 'Server Error, tweets not loading right now. Please try again later.' };

@@ -8,9 +8,8 @@ const findUser = async(creds) =>{
 }
 
 const addUser=async(user)=>{
-    const newUser = await db.one('INSERT INTO users (email, username, _at, password) VALUES ($1,$2,$3,$4) RETURNING *', [user.email, user.username, user._at, user.password])
-    console.log(newUser)
-    if(newUser._at){
+    const newUser = await db.one('INSERT INTO users (email, username, shorty, password) VALUES ($1,$2,$3,$4) RETURNING *', [user.email, user.username, user.shorty, user.password])
+    if(newUser.shorty){
         return newUser
     }else{
         return {error:'Problem occured at create new user'}

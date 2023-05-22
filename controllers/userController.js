@@ -6,7 +6,7 @@ const {findUser, addUser} = require('../queries/users')
 const tweets = require('./tweetController')
 users.use('/:userId/shorts', tweets)
 users.post('/signup', async (req, res) => {
-  const {email, username, _at, password} = req.body
+  const {email, username, shorty, password} = req.body
   const user = await findUser(email)
   if (user.length === 1) {
     res.status(405).json({error: 'email already exist'})
@@ -19,14 +19,13 @@ users.post('/signup', async (req, res) => {
       const newUser = {
         email,
         username,
-        _at,
+        shorty,
         password: hash,
       }
       var flag = 1
       const addedUser = await addUser(newUser)
       if (addedUser.error) {
         flag = 0
-        // console.log(error)
         res.status(500).send(addedUser.error)
       } else {
         flag = 1
