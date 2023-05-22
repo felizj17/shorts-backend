@@ -12,4 +12,7 @@ app.get('/', (_,res)=>{
 })
 app.use('/tweets', tweetController)
 app.use('/users', userController)
+app.use('*', (_,res)=>{
+    res.status(404).json({error:'404, Page Not Found!'})
+})
 module.exports = app

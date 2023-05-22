@@ -1,9 +1,10 @@
 const express = require('express')
-const tweets = express.Router()
+const tweets = express.Router({mergeParams:true})
 const {getAllTweets, getOneTweet, tweet, editTweet, deleteTweet} =require('../queries/tweets')
 
 tweets.get('/', async(req,res)=>{
-    const allTweets = await getAllTweets()
+    console.log(req.params.userId)
+    const allTweets = await getAllTweets(req.params.userId)
     if(!allTweets.error){
         res.status(202).json(allTweets)
     }else{
